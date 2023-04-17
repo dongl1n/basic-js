@@ -18,19 +18,19 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 
-const    InitialActivity = 15
-const    HalfLife = 5730
 const    DecayRate = 0.693
 
 function dateSample(sampleActivity) {
+    if(sampleActivity>MODERN_ACTIVITY || sampleActivity==='0' || sampleActivity<0) return false;
     if (typeof sampleActivity != 'string') {
     return false;
     }
    else if ( isNaN(parseFloat(sampleActivity)) ){
         return false;
     } else {
-        time = Math.ceil( Math.log( InitialActivity / parseFloat(sampleActivity) ) * HalfLife / DecayRate )
-        return time
+        
+	time = Math.ceil( Math.log( MODERN_ACTIVITY / parseFloat(sampleActivity) ) * HALF_LIFE_PERIOD / DecayRate )
+        return (time<0)?false:time;
     }
 }
 
